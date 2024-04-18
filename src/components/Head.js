@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toogleMenu } from "../utils/appSlice";
-
+import Sat from "../items/Sat.png"
 const Head = () => {
   const dispatch = useDispatch();
 
@@ -18,8 +18,8 @@ const Head = () => {
           alt="hamburger"
         />
         <img
-          className="h-14 -mt-2"
-          src="https://1000logos.net/wp-content/uploads/2017/05/Youtube-logo.jpg"
+          className="h-[60px] -mt-2"
+          src={Sat}
           alt="you-tube logo"
         />
       </div>
