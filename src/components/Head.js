@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toogleMenu } from "../utils/appSlice";
 import Sat from "../items/Sat.png";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import {cacheResults} from "../utils/searchSlice";
+
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false); //for hiding youtube serach bar
+
+  const searchCache = useSelector((store) => store.search);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     //make API call
     console.log(searchQuery);
@@ -15,7 +21,14 @@ const Head = () => {
     //but if the difference between 2 api call is <200ms
     //decline the API call
 
-    const timer = setTimeout(() => getSearchSuggestion(), 200);
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        getSearchSuggestion();
+      }
+    }, 200);
+
     return () => {
       clearTimeout(timer);
     };
@@ -29,9 +42,14 @@ const Head = () => {
     const json = await data.json();
     // console.log(json[1]);
     setSuggestions(json[1]);
-  };
 
-  const dispatch = useDispatch();
+    //update cache
+    dispatch(
+      cacheResults({
+        [searchQuery]:json[1],
+      })
+    );
+  };
 
   const toggleMenuHandler = () => {
     dispatch(toogleMenu()); //it is comes form appSlice
@@ -54,11 +72,9 @@ const Head = () => {
             className="w-1/2  border  border-gray-300 p-2 rounded-l-full"
             type="text"
             value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-            }}
+            onChange={(e) => {setSearchQuery(e.target.value);}}
             onFocus={() => setShowSuggestion(true)}
-        onBlur={()=>setShowSuggestion(false)}
+            onBlur={() => setShowSuggestion(false)}
           />
           <button className="border  border-gray-300  bg-gray-100 p-2 rounded-r-full">
             search
@@ -77,7 +93,7 @@ const Head = () => {
           </div>
         )}
       </div>
-    
+
       {/* ----------user icon------------------- */}
       <div>
         <img
