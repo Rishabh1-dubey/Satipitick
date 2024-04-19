@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toogleMenu } from "../utils/appSlice";
-import Sat from "../items/Sat.png"
+import Sat from "../items/Sat.png";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
 const Head = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestion, setShowSuggestion] = useState(false); //for hiding youtube serach bar
+  useEffect(() => {
+    //make API call
+    console.log(searchQuery);
+
+    //make an api call after ever key press
+    //but if the difference between 2 api call is <200ms
+    //decline the API call
+
+    const timer = setTimeout(() => getSearchSuggestion(), 200);
+    return () => {
+      clearTimeout(timer);
+    };
+
+    // getSearchSuggestion();
+  }, [searchQuery]);
+
+  const getSearchSuggestion = async () => {
+    console.log("API Call - " + searchQuery);
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    // console.log(json[1]);
+    setSuggestions(json[1]);
+  };
+
   const dispatch = useDispatch();
 
   const toggleMenuHandler = () => {
-    dispatch(toogleMenu());  //it is comes form appSlice
+    dispatch(toogleMenu()); //it is comes form appSlice
   };
   return (
     <div className="grid grid-flow-col p-3 m-2 shadow-xl">
@@ -17,22 +45,39 @@ const Head = () => {
           src="https://w7.pngwing.com/pngs/626/110/png-transparent-black-logo-computer-icons-hamburger-button-menu-new-menu-angle-text-rectangle.png"
           alt="hamburger"
         />
-        <img
-          className="h-[60px] -mt-2"
-          src={Sat}
-          alt="you-tube logo"
-        />
+        <img className="h-[60px] -mt-2" src={Sat} alt="you-tube logo" />
       </div>
       {/* ----------search bar------------------------- */}
       <div className="col-span-10 pl-80  ">
-        <input
-          className="w-1/2  border  border-gray-300 p-2 rounded-l-full"
-          type="text"
-        ></input>
-        <button className="border  border-gray-300  bg-gray-100 p-2 rounded-r-full">
-          search
-        </button>
+        <div>
+          <input
+            className="w-1/2  border  border-gray-300 p-2 rounded-l-full"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+            }}
+            onFocus={() => setShowSuggestion(true)}
+        onBlur={()=>setShowSuggestion(false)}
+          />
+          <button className="border  border-gray-300  bg-gray-100 p-2 rounded-r-full">
+            search
+          </button>
+        </div>
+        {showSuggestion && (
+          <div className="   fixed   bg-white py-2 px-3 w-[430px] border rounded-lg border-gray-100">
+            <ul>
+              {suggestions.map((s) => (
+                <li key={s} className="py-2 px-3 shadow-sm hover:bg-gray-100">
+                  {" "}
+                  🔍 {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
+    
       {/* ----------user icon------------------- */}
       <div>
         <img
