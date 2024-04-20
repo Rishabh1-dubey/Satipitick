@@ -15,7 +15,7 @@ const Head = () => {
 
   useEffect(() => {
     //make API call
-    console.log(searchQuery);
+    // console.log(searchQuery);
 
     //make an api call after ever key press
     //but if the difference between 2 api call is <200ms
