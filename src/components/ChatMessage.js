@@ -1,15 +1,15 @@
 import React from "react";
 
-const ChatMessage = ({name, message}) => {
+const ChatMessage = ({name, message,profile}) => {
   return (
-    <div className="flex items-center shadow-md p-2 ">
+    <div className="flex items-center shadow-md p-2  ">
       
       <img
-        className="h-10 col-span-5"
-        src="https://static.vecteezy.com/system/resources/previews/019/879/186/original/user-icon-on-transparent-background-free-png.png"
+        className="h-8 rounded-full "
+        src={profile}
         alt="user"
       />
-      <span className="font-bold ">{name}</span>
+      <span className="font-bold px-2 ">{name}</span>
       <span className="px-3">{message}</span>
     </div>
   );
