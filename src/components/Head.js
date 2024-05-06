@@ -69,8 +69,9 @@ const Head = () => {
       <div className="col-span-10 pl-80  ">
         <div>
           <input
-            className="w-1/2  border  border-gray-300 p-2 rounded-l-full"
+            className="w-1/2  border   border-gray-300 p-2 rounded-l-full"
             type="text"
+            placeholder="Search "
             value={searchQuery}
             onChange={(e) => {setSearchQuery(e.target.value);}}
             onFocus={() => setShowSuggestion(true)}
