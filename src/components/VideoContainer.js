@@ -17,7 +17,7 @@ const VideoContainer = () => {
     setvideos(json.items);
   };
 
-  if(!videos.length){
+  if(!videos?.length){
     return <Shimmer/>
   }
   return (
