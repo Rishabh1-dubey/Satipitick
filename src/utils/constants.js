@@ -14,7 +14,9 @@ export const CHANNEL_INFO_URL =
   "&id=";
 
 export const YOUTUBE_SEARCH_API =
-  "https://thingproxy.freeboard.io/fetch/http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  // "https://thingproxy.freeboard.io/fetch/http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+
+  "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent("https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=");
 
   // hit and trail form discord not working -------  ("https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=namaste",{mode: 'no-cors',method: "get"}) ---------------------
 
