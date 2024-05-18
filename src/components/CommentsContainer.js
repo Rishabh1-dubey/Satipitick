@@ -3,6 +3,8 @@ import Comments from "./Comments";
 import { useDispatch, useSelector } from "react-redux";
 import { setComments } from "../utils/commentSlice";
 import { YOUTUBE_COMMENT_API } from "../utils/constants";
+import { AiFillLike } from "react-icons/ai";
+import { BiSolidDislike } from "react-icons/bi";
 // const commentsData = [
 //   {
 //     name: "Rishabh Dubey",
@@ -140,6 +142,7 @@ const CommentsList = ({ list, isComment }) => {
         <div className="hidden md:block" key={comment?.id}>
           <div className="border max-w-[60rem] mt-2 mb-4 rounded-lg shadow-lg ">
             {/* /border ke liye use kiya gya haiii */}
+           
             <Comment
               data={
                 isComment
@@ -147,26 +150,29 @@ const CommentsList = ({ list, isComment }) => {
                   : comment?.snippet?.topLevelComment?.snippet
               }
             />
+         
+
             {comment?.replies?.comments?.length > 0 && (
-              <div className="pl-16">
+              <div className="pl-16 border ">
                 <CommentsList
                   list={comment?.replies?.comments}
                   isComment={true}
-                />
-              </div>
+                  />
+                  </div>
+             
             )}
             <div className="flex items-center mb-2 mx-20">
               <button
                 onClick={ handleLike}
                 className="mr-2 flex items-center mb-2 "
                 >
-               👍🏻  
+               <AiFillLike className="hover:text-green-400 text-xl" />
               </button>
               <button
                 onClick={ handleDislike}
-                className="flex items-center mb-2"
+                className="flex items-center mb-2 "
               >
-                 👎🏻
+                <BiSolidDislike className="mt-1 hover:text-red-700 text-xl  " />
               </button>
               <span className="mb-2 ml-2 font-bold hover:cur">Reply</span>
             </div>

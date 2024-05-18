@@ -3,6 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { CHANNEL_INFO_URL, VIDEO_INFO_URL } from "../utils/constants";
 import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
 import { prettifyNumber } from "./../utils/number";
+import { AiFillLike } from "react-icons/ai";
+import { BiSolidDislike } from "react-icons/bi";
+import { IoIosShareAlt } from "react-icons/io";
 const VideoInfo = () => {
   const [videoInfo, setVideoInfo] = useState(null);
   const [channelID, setChannelID] = useState();
@@ -36,7 +39,8 @@ const VideoInfo = () => {
 
   return (
       <div className="flex flex-col ">
-        <div className="mx-6 w-[996px] ">hello
+        <div className="mx-6 w-[996px] ">
+          {/* hello for watch page */}
       <h1 className="font-bold text-xl">
         {videoInfo?.items?.[0]?.snippet?.title}
       </h1>
@@ -66,16 +70,16 @@ const VideoInfo = () => {
         <div>
           <h2 className="flex mx-5">
             <button className="flex justify-center items-center ml-8 h-9 bg-gray-100 font-semibold text-black rounded-full px-4 py-0">
-              <span className="h-5 w-5 mr-2">👍🏻</span>
+              <span className="h-5 w-5 mr-2"> <AiFillLike /></span>
               <span className="mr-2">
                 {prettifyNumber(videoInfo?.items?.[0]?.statistics?.likeCount)}
               </span>
               <span className="mr-2">|</span>
-              <span className="h-5 w-5 mt-1">👎🏻</span>
+              <span className="h-5 w-5 mt-1"> <BiSolidDislike /></span>
             </button>
-            <button className="ml-4 h-9 bg-gray-100 font-semibold text-black rounded-full  px-4 py-0">
-              Share
-            </button>
+            <span className=" flex gap-2  ml-4 h-9 bg-gray-100 font-semibold text-black rounded-full  px-4 py-1">
+            <IoIosShareAlt  className="text-xl" /> Share
+            </span>
             <button className="ml-4 h-9 bg-gray-100 font-semibold text-black rounded-full  px-4 py-0">
               Save
             </button>

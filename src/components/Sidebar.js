@@ -5,8 +5,7 @@ import { MdHome } from "react-icons/md";
 import { SiYoutubeshorts } from "react-icons/si";
 import { MdSubscriptions } from "react-icons/md";
 import { FaFreeCodeCamp } from "react-icons/fa6";
-import { HiTrendingUp } from "react-icons/hi";
-import { FaYoutube } from "react-icons/fa";
+
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
@@ -14,7 +13,7 @@ const Sidebar = () => {
   //Early Return Pattern
   if (!isMenuOpen) return null;
   return (
-    <div className="px-8 py-9 shadow-lg w-56 ">
+    <div className="px-6 py-9 shadow-lg w-56 ">
       <ul className="">
         <li className="flex gap-2">
           <MdHome className="text-xl mb-2  " />

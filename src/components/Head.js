@@ -54,8 +54,15 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toogleMenu()); //it is comes form appSlice
   };
+
+
+  const searchShow =()=>{
+    alert("working on it");
+  }
+
+
   return (
-    <div className="grid grid-flow-col p-3 m-2 shadow-xl">
+    <div className=" grid grid-flow-col p-3 m-2 shadow-xl">
       <div className="flex col-span-1 gap-6">
         <img
           onClick={() => toggleMenuHandler()}
@@ -63,7 +70,9 @@ const Head = () => {
           src="https://w7.pngwing.com/pngs/626/110/png-transparent-black-logo-computer-icons-hamburger-button-menu-new-menu-angle-text-rectangle.png"
           alt="hamburger"
         />
-        <img className="h-[60px] -mt-2" src={Sat} alt="you-tube logo" />
+    
+        <img className="h-[70px] -mt-4" src={Sat} alt="you-tube logo" />
+       
       </div>
       {/* ----------search bar------------------------- */}
       <div className="col-span-10 pl-80  ">
@@ -77,7 +86,7 @@ const Head = () => {
             onFocus={() => setShowSuggestion(true)}
             onBlur={() => setShowSuggestion(false)}
           />
-          <button className="border  border-gray-300  bg-gray-100 p-2 rounded-r-full">
+          <button className="border  border-gray-300  bg-gray-100 p-2 rounded-r-full" onClick={searchShow}>
             search
           </button>
         </div>

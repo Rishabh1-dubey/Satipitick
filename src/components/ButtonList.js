@@ -12,11 +12,11 @@ const List = [
   "IAS",
   "RBI",
   "Tech",
-  "Motivation",
+  "Motivation"
 ];
 const ButtonList = () => {
   return (
-    <div className=" flex">
+    <div className=" flex  ">
       {List.map((listIten, index) => {
         return <Button name={listIten} key={index} />;
       })}
