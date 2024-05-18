@@ -17,9 +17,9 @@ const VideoContainer = () => {
     setvideos(json.items);
   };
 
-  if(!videos?.length){
-    return <Shimmer/>
-  }
+  // if(!videos.length){
+  //   return <Shimmer/>
+  // }
   return (
     <div className="flex flex-wrap  justify-evenly ">
       {videos.map((video) => (
