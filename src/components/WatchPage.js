@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import CommentsContainer from "./CommentsContainer";
 import LiveChat from "./LiveChat";
+import VideoInfo from "./VideoInfo";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
+  const videoID = searchParams.get("v");
   console.log(searchParams.get("v"));
 
   const dispatch = useDispatch();
@@ -28,11 +30,17 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="w-full">
+          <div className="w-full relative bottom-6">
+        <div className=" relative top-[640px] font-bold text-xl  mx-2 w-[490px]">
+            Releated video
+           
+          </div>
           <LiveChat />
         </div>
       </div>
-      <CommentsContainer />
+      <VideoInfo />
+
+      <CommentsContainer videoID={videoID} />
     </div>
   );
 };
